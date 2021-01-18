@@ -45,7 +45,7 @@ const main_document = {
     jsonGET("/index.json", (data) => {
       objs.navtitle = data.navtitle;
     });
-    jsonGET("meta.json", (data) => {
+    jsonGET("/b/"+window.location.hash.replace("#","")+"/meta.json", (data) => {
       objs.title = data.title;
       objs.customfooter = data.customfooter;
     });
