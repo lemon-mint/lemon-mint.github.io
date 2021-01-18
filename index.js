@@ -57,6 +57,7 @@ const main_document = {
                 if ((el.href.startsWith("http://") || el.href.startsWith("https://")) && (el.origin != window.location.origin)) {
                   el.rel = "nofollow";
                   el.onclick = (e) => {
+                    e.preventDefault();
                     let clickcount = e.detail;
                     setTimeout(() => {
                       console.log(clickcount);
@@ -68,7 +69,8 @@ const main_document = {
                     }, 100)
                     return false;
                   }
-                  el.ondblclick = () => {
+                  el.ondblclick = (e) => {
+                    e.preventDefault();
                     setTimeout(() => {
                       window.location.href = el.href;
                     }, 10)
