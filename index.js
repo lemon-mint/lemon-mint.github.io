@@ -35,7 +35,8 @@ const main_document = {
     return {
       navtitle: "Loading...",
       title: "Loading...",
-      markdown: "<p>Loading...</p>"
+      markdown: "<p>Loading...</p>",
+      customfooter: ""
     }
   },
   mounted() {
@@ -45,6 +46,7 @@ const main_document = {
     });
     jsonGET("meta.json", (data) => {
       objs.title = data.title;
+      objs.customfooter = data.customfooter;
     });
     setTimeout(
       () => {
