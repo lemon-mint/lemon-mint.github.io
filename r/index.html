@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirect</title>
+    <script>
+        async function jsonGET(url, callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4) {
+                    let data = JSON.parse(xhr.responseText);
+                    callback(data);
+                }
+            };
+            xhr.send();
+        }
+
+        async function rawGET(url, callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4) {
+                    let data = xhr.responseText;
+                    callback(data);
+                }
+            };
+            xhr.send();
+        }
+        const url = "/r/r_"+window.location.hash.replace("#","")+".json";
+        console.log(url);
+        setTimeout(()=>{jsonGET(url, (data)=>{
+            window.location.href = data.targeturl;
+        });},1)
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

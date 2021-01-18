@@ -3,7 +3,7 @@
 
 [external link](https://example.com)
 
-[example post (internal link)](/b/example-post)
+[example post (internal link)](/b/first-webauthn)
 
 ``` javascript
 //Code block
