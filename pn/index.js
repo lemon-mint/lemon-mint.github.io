@@ -41,57 +41,61 @@ const main_document = {
     }
   },
   mounted() {
-    jsonGET("/posts.json", (resp) => {
-      const postname = resp[parseInt(window.location.hash.replace("#",""))]
-      let objs = this;
-      jsonGET("/index.json", (data) => {
-        objs.navtitle = data.navtitle;
-      });
-      jsonGET("/b/" + postname + "/meta.json", (data) => {
-        objs.title = data.title;
-        objs.customfooter = data.customfooter;
-      });
-      rawGET("/globalfooter.html", (data) => {
-        objs.globalfooter = data
-      })
-      setTimeout(
-        () => {
-          rawGET("/b/" + postname + "/body.md", (data) => {
-            objs.markdown = md.makeHtml(data);
-            setTimeout(() => {
-              hljs.initHighlighting();
-              document.querySelectorAll("a").forEach((el) => {
-                if (typeof (el.href) == "string") {
-                  if ((el.href.startsWith("http://") || el.href.startsWith("https://")) && (el.origin != window.location.origin)) {
-                    el.rel = "nofollow";
-                    el.onclick = (e) => {
-                      e.preventDefault();
-                      let clickcount = e.detail;
-                      setTimeout(() => {
-                        console.log(clickcount);
-                        if (clickcount < 2) {
-                          window.location.href = "/redirect/?url=" + el.href;
-                        } else {
+    let objs = this;
+    function loadhash() {
+      jsonGET("/posts.json", (resp) => {
+        const postname = resp[parseInt(window.location.hash.replace("#", ""))]
+        jsonGET("/index.json", (data) => {
+          objs.navtitle = data.navtitle;
+        });
+        jsonGET("/b/" + postname + "/meta.json", (data) => {
+          objs.title = data.title;
+          objs.customfooter = data.customfooter;
+        });
+        rawGET("/globalfooter.html", (data) => {
+          objs.globalfooter = data
+        })
+        setTimeout(
+          () => {
+            rawGET("/b/" + postname + "/body.md", (data) => {
+              objs.markdown = md.makeHtml(data);
+              setTimeout(() => {
+                hljs.initHighlighting();
+                document.querySelectorAll("a").forEach((el) => {
+                  if (typeof (el.href) == "string") {
+                    if ((el.href.startsWith("http://") || el.href.startsWith("https://")) && (el.origin != window.location.origin)) {
+                      el.rel = "nofollow";
+                      el.onclick = (e) => {
+                        e.preventDefault();
+                        let clickcount = e.detail;
+                        setTimeout(() => {
+                          console.log(clickcount);
+                          if (clickcount < 2) {
+                            window.location.href = "/redirect/?url=" + el.href;
+                          } else {
+                            window.location.href = el.href;
+                          }
+                        }, 100)
+                        return false;
+                      }
+                      el.ondblclick = (e) => {
+                        e.preventDefault();
+                        setTimeout(() => {
                           window.location.href = el.href;
-                        }
-                      }, 100)
-                      return false;
+                        }, 10)
+                        return false;
+                      };
                     }
-                    el.ondblclick = (e) => {
-                      e.preventDefault();
-                      setTimeout(() => {
-                        window.location.href = el.href;
-                      }, 10)
-                      return false;
-                    };
                   }
-                }
-              });
-            }, 500);
-          });
-        }, 400
-      )
-    })
+                });
+              }, 500);
+            });
+          }, 400
+        )
+      })
+    }
+    loadhash();
+    window.addEventListener("hashchange",loadhash);
   },
   delimiters: ['[%^]', '[^%]']
 };

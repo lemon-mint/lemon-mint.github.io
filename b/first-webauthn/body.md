@@ -6,7 +6,7 @@
 
 
 (아래는 Namecheap의 Two-Factor Authentication 설정화면)
-![](img/image.png)
+![](/static/first-webauthn/img/image.png)
 ## Webauthn
 Webauthn은 fido2 하드웨어 보안 토큰을 웹에서 사용할 수 있도록하는 W3C에서 표준화한 자바스크립트 API 표준이다. <https://en.wikipedia.org/wiki/WebAuthn>
 ## 개발을 시작하면서
@@ -28,7 +28,7 @@ go언어가 기본적으로 crypto 라이브러리가 풍부하고 손에 익어
 클라이언트는 `navigator.credentials.get`을 호출하여 challenge를 자신의 개인키를 이용하여 서명하고 서버에 response 를 전송한다, 서버는 이를 다시 해당유저의 공개키로 검증하고 AuthenticatorData를 파싱해서 Relying Party Hash와 counter를 확인한뒤 클라이언트에게 인증권한을 부여한다.
 
 아래는 서버검증 관련 코드의 일부이다.
-![](img/verifycode.svg)
+![](/static/first-webauthn/img/verifycode.svg)
 # 결과!
 결과물이 나오기까지는 4일정도 걸린것같다.
 ![](https://user-images.githubusercontent.com/55233766/104909154-ce0a9d00-59ca-11eb-8ca8-ff2a009d57d8.png)
