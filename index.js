@@ -13,8 +13,8 @@ async function jsonGET(url, callback) {
 const main_document = {
     data() {
         return {
-            navtitle: "Welcome!",
-            title: "Hello, World!"
+            navtitle: "Loading...",
+            title: "Loading..."
         }
     },
     mounted() {
