@@ -36,7 +36,8 @@ const main_document = {
       navtitle: "Loading...",
       title: "Loading...",
       markdown: "<p>Loading...</p>",
-      customfooter: ""
+      customfooter: "",
+      globalfooter: ""
     }
   },
   mounted() {
@@ -48,6 +49,9 @@ const main_document = {
       objs.title = data.title;
       objs.customfooter = data.customfooter;
     });
+    rawGET("/globalfooter.html", (data)=>{
+      objs.globalfooter = data
+    })
     setTimeout(
       () => {
         rawGET("body.md", (data) => {
