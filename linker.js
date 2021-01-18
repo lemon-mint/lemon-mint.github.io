@@ -1,5 +1,5 @@
 const runlinker = () => {
-    rawGET("/allow_link.json", (allowlist) => {
+    jsonGET("/allow_link.json", (allowlist) => {
         hljs.initHighlighting();
         document.querySelectorAll("a").forEach((el) => {
             if (typeof (el.href) == "string") {
