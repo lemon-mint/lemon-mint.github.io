@@ -1,9 +1,9 @@
 - [x] checked
 - [ ] blank
 
-[google link](https://google.com)
+[external link](https://example.com)
 
-[local link](/home)
+[example post (internal link)](/b/example-post)
 
 ``` javascript
 //Code block
