@@ -1,9 +1,11 @@
 function copyc(text) {
     let input = document.getElementById("copyc");
+    input.hidden = false;
     input.value = text;
     input.focus();
     input.select();
     document.execCommand("copy");
+    input.hidden = true;
 }
 
 function copysharelink() {
