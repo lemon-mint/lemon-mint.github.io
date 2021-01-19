@@ -1,7 +1,7 @@
 안녕하세요!
 
 
-[최근글](/n/latest/)
+[최근글](/r/latest/)
 
 잘못된 내용은 [이곳에 Pull Request](https://github.com/lemon-mint/lemon-mint.github.io/pulls)를 요청해 주십시오
 
