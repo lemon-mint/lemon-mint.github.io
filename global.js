@@ -21,6 +21,6 @@ function copysharelink() {
         } else if (window.location.pathname.startsWith("/n/")) {
             postnum = parseInt(window.location.hash.slice(1));
         }
-        copyc(baseurl+"/r/n/"+(""+postnum))
+        copyc(baseurl+"/r/n/#"+(""+postnum))
     })
 }
