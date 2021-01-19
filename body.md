@@ -1,12 +1,5 @@
 ### 안녕하세요!.
 
-### TODO
-
-- [ ] 공유 링크
-- [ ] <del>SSR</del>
-
-
-
 ---
 
 [Recent Post](/r/latest/)
