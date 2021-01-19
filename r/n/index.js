@@ -45,8 +45,7 @@ const main_document = {
     function loadhash() {
       jsonGET("/posts.json", (resp) => {
         const postname = resp[parseInt(window.location.hash.slice(1))];
-        window.location.hash = "";
-        window.location.pathname = `/b/${postname}/`;
+        window.location.href = window.location.href.slice(0,window.location.href.length-window.location.pathname.length- window.location.hash.length) + `/b/${postname}/`
       });
     }
     loadhash();

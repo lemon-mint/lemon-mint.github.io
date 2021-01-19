@@ -43,8 +43,7 @@ const main_document = {
   mounted() {
     function loadhash() {
       jsonGET("/posts.json", (resp) => {
-        const baseurl = window.location.href.slice(0,window.location.href.length-window.location.pathname.length- window.location.hash.length);
-        window.location.href.replace(`${baseurl}/b/${resp[resp.length-1]}/`);
+        window.location.pathname = `/b/${resp[resp.length-1]}/`;
       });
     }
     loadhash();
