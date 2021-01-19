@@ -1,11 +1,8 @@
-- [x] checked
-- [ ] blank
+안녕하세요!
 
-[external link](https://example.com)
 
-[example post (internal link)](/b/first-webauthn)
+[최근글](/n/latest/)
 
-``` javascript
-//Code block
-console.log("Hello, World!");
-```
+잘못된 내용은 [이곳에 Pull Request](https://github.com/lemon-mint/lemon-mint.github.io/pulls)를 요청해 주십시오
+
+[![Original repository](https://img.shields.io/badge/-Original%20repository-lightgrey)](https://github.com/lemon-mint/lemon-mint.github.io)
