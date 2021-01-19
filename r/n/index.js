@@ -44,12 +44,12 @@ const main_document = {
     let objs = this;
     function loadhash() {
       jsonGET("/posts.json", (resp) => {
-        const postname = resp[parseInt(window.location.hash.replace("#", ""))];
+        const postname = resp[parseInt(window.location.hash.slice(1))];
+        window.location.hash = "";
         window.location.pathname = `/b/${postname}/`;
       });
     }
     loadhash();
-    window.addEventListener("hashchange",loadhash);
   },
   delimiters: ['[%^]', '[^%]']
 };
