@@ -60,7 +60,7 @@ const main_document = {
             runlinker();
           }, 100);
         });
-      }, 400
+      }, 1
     )
   },
   delimiters: ['[%^]', '[^%]']
