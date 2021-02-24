@@ -53,6 +53,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           let counter = setInterval(() => {
             this.count -= 1;
             if (this.count <= 0) {
+              let link = document.createElement("a")
+              link.rel = "noreferrer";
+              link.referrerPolicy = "no-referrer";
+              link.href = document.getElementById("redirect").value;
+              document.body.appendChild(link)
+              link.click();
               window.location.replace(
                 document.getElementById("redirect").value
               );
