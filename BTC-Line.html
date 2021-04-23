@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upbit BTC</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        let updatecallback = ()=>{}
+        let last = {}
+        const getws = () => {
+            // wss://api.upbit.com/websocket/v1
+            let ws = new WebSocket("wss://api.upbit.com/websocket/v1");
+            //ws.onclose = getws
+            ws.onerror = () => {
+                ws.close();
+                //getws();
+            };
+            ws.onmessage = async (msg) => {
+                let jsonmsg = await msg.data.text();
+                last = JSON.parse(jsonmsg);
+                console.log(last);
+                updatecallback(last);
+            };
+            ws.onopen = () => {
+                const request = [{ "ticket": "testgetbtc" }, { "type": "ticker", "codes": ["KRW-BTC"] }];
+                ws.send(JSON.stringify(request));
+            };
+        };
+        //setInterval(updatecallback,300);
+    </script>
+</head>
+
+<body>
+    <div id="chart"></div>
+    <script>
+        getws();
+        setTimeout(() => {
+            chartdata = [];
+            let options = {
+                title: {
+                    text: 'Dynamic BTC Price Chart',
+                    align: 'left'
+                },
+                chart: {
+                    type: 'line',
+                    height: 700,
+                    animations: {
+                        enabled: false,
+                    },
+                    toolbar: {
+                        show: false
+                    },
+                    zoom: {
+                        enabled: false
+                    },
+                },
+                series: [{
+                    data: chartdata.slice()
+                }],
+                xaxis: {
+                    type: 'datetime',
+                    labels: {
+                        format: 'HH:mm'
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                //stroke: {
+                //    curve: 'smooth'
+                //},
+            }
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+            updatecallback = function () {
+                chartdata.push(
+                    {
+                        x: last.timestamp,
+                        y: last.trade_price
+                    }
+                );
+                if (chartdata.length > 1000) {
+                    chartdata.shift();
+                }
+                chart.updateSeries([{
+                    data: chartdata
+                }]);
+            };
+        },1000)
+    </script>
+</body>
+
+</html>
